@@ -11,12 +11,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 public class ContactControllerTest extends BaseTest {
     private MockMvc mockMvc;
-    @Order(1)
-    @Test
-    @SneakyThrows
-    public void createWithFields() {
+//    @Order(1)
+//    @Test
+//    @SneakyThrows
+//    public void createWithFields() {
 //        mockMvc.perform(post("http://localhost:9090/contact?id=sd")
 //                .contentType(APPLICATION_JSON)
 //                .accept(APPLICATION_JSON));
-    }
+//    }
 }
