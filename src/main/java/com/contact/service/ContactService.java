@@ -7,6 +7,7 @@ import com.contact.request.ContactUpdateRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import com.contact.repositories.ContactRepository;
 
@@ -20,10 +21,11 @@ import java.util.UUID;
 public class ContactService {
     @Autowired
     private final ContactRepository repository;
+    @Autowired
     private final ContactMapper contactMapper;
 
     public Optional<Contact> getContact(String id) {
-        return Optional.ofNullable(repository.findById(id).orElseThrow(() -> new ItemNotFoundException("")));
+        return Optional.ofNullable(repository.findById(id).orElseThrow(() -> new ItemNotFoundException("Contact not found")));
     }
     public List<Contact> getContacts() {
         return contactMapper.toContactListResponse(repository.findAll());

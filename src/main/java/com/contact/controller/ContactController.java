@@ -5,6 +5,8 @@ import com.contact.request.ContactRequest;
 import com.contact.request.ContactUpdateRequest;
 import com.contact.service.ContactService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("contact")
 public class ContactController {
+    @Autowired
     private final ContactService contactService;
     @GetMapping()
     public Optional<Contact> getContact(@RequestParam String id) {
