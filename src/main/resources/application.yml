@@ -6,3 +6,6 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017
       database: contact-service
+      auto-index-creation: true
+  main:
+    allow-bean-definition-overriding: true

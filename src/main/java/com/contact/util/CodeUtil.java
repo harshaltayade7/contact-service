@@ -1,4 +1,4 @@
-package util;
+package com.contact.util;
 
 import org.springframework.stereotype.Component;
 
