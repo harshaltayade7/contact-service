@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Data
 public class ContactUpdateRequest {
-    private UUID id;
+    private String id;
     private String firstName;
     private String lastName;
     private String company;

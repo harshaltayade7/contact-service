@@ -20,7 +20,7 @@ import java.util.UUID;
 public class ContactController {
     private final ContactService contactService;
     @GetMapping()
-    public Optional<Contact> getContact(@RequestParam UUID id) {
+    public Optional<Contact> getContact(@RequestParam String id) {
         return contactService.getContact(id);
     }
     @GetMapping("/all")
@@ -39,7 +39,7 @@ public class ContactController {
     }
     @DeleteMapping
     @ResponseStatus(HttpStatus.FOUND)
-    public void removeContact(@RequestParam UUID id) {
+    public void removeContact(@RequestParam String id) {
         contactService.removeContact(id);
     }
 }
