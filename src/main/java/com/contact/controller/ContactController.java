@@ -6,7 +6,6 @@ import com.contact.request.ContactUpdateRequest;
 import com.contact.service.ContactService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,18 +27,15 @@ public class ContactController {
         return contactService.getContacts();
     }
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public Contact createContact(@RequestBody @Valid ContactRequest contactRequest) {
         return contactService.createContact(contactRequest);
     }
     @PutMapping()
-    @ResponseStatus(HttpStatus.OK)
     public Contact updateContact(@RequestBody @Valid ContactUpdateRequest contactUpdateRequest) {
         return contactService.updateContact(contactUpdateRequest);
     }
     @DeleteMapping
-    @ResponseStatus(HttpStatus.FOUND)
-    public void removeContact(@RequestParam String id) {
-        contactService.removeContact(id);
+    public String removeContact(@RequestParam String id) {
+        return contactService.removeContact(id);
     }
 }

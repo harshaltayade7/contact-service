@@ -6,7 +6,6 @@ import com.contact.request.ContactRequest;
 import com.contact.request.ContactUpdateRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.contact.repositories.ContactRepository;
@@ -24,7 +23,7 @@ public class ContactService {
     private final ContactMapper contactMapper;
 
     public Optional<Contact> getContact(String id) {
-        return Optional.ofNullable(repository.findById(UUID.fromString(id)).orElseThrow(() -> new ItemNotFoundException("")));
+        return Optional.ofNullable(repository.findById(id).orElseThrow(() -> new ItemNotFoundException("")));
     }
     public List<Contact> getContacts() {
         return contactMapper.toContactListResponse(repository.findAll());
@@ -34,14 +33,16 @@ public class ContactService {
         return response;
     }
     public Contact updateContact(ContactUpdateRequest contactUpdateRequest) {
-            Contact contact = repository.findById(UUID.fromString(new String(contactUpdateRequest.getId()))).orElseThrow(()-> new ItemNotFoundException("Contact not found"));
-            var mapping = contactMapper
-               .updateContact(contactUpdateRequest, contact);
+        Contact contact = repository.findById(contactUpdateRequest.getId()).orElseThrow(()-> new ItemNotFoundException("Contact not found"));
+        var mapping = contactMapper
+                .updateContact(contactUpdateRequest, contact);
+        repository.save(mapping);
         return mapping;
     }
-    public void removeContact(String id) {
-        if (!repository.existsById(UUID.fromString(id)))
+    public String removeContact(String id) {
+        if (!repository.existsById(id))
             throw new ItemNotFoundException("Contact not found");
-        repository.deleteById(UUID.fromString(id));
+        repository.deleteById(id);
+        return "Contact deleted successfully";
     }
 }
