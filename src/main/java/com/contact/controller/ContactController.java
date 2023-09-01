@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
@@ -18,7 +20,7 @@ import java.util.List;
 public class ContactController {
     private final ContactService contactService;
     @GetMapping()
-    public Contact getContact(@RequestParam String id) {
+    public Optional<Contact> getContact(@RequestParam UUID id) {
         return contactService.getContact(id);
     }
     @GetMapping("/all")
@@ -37,7 +39,7 @@ public class ContactController {
     }
     @DeleteMapping
     @ResponseStatus(HttpStatus.FOUND)
-    public ResponseEntity<String> removeContact(@RequestParam String id) {
-        return contactService.removeContact(id);
+    public void removeContact(@RequestParam UUID id) {
+        contactService.removeContact(id);
     }
 }
